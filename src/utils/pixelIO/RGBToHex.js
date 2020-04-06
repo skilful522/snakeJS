@@ -1,4 +1,4 @@
-export default function rgbToHex(r, g, b, ...alpha) {
+export default function rgbToHex([r, g, b]) {
     r = r.toString(16);
     g = g.toString(16);
     b = b.toString(16);
@@ -7,5 +7,5 @@ export default function rgbToHex(r, g, b, ...alpha) {
     if (g.length === 1) g = `0${g}`;
     if (b.length === 1) b = `0${b}`;
 
-    return `#${r}${g}${b}`;
+    return `#${r}${g}${b}`.toUpperCase();
 }
