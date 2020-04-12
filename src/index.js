@@ -1,10 +1,10 @@
-import handleKeyPush from './utils/gameControl/handleKeyPush.js';
-import correctPosition from './utils/gameLogic/correctPosition.js';
-import getCorrectRandomPosition from './utils/gameLogic/getCorrectRandomPosition.js';
-import getContext from './utils/getContext.js';
-import init from './utils/init.js';
-import checkFoodCollision from './utils/gameLogic/checkFoodCollision.js';
-import uploadAllColors from './utils/uploadAllColors.js';
+import handleKeyPush from './utils/gameControl/handleKeyPush';
+import correctPosition from './utils/gameLogic/correctPosition';
+import getCorrectRandomPosition from './utils/gameLogic/getCorrectRandomPosition';
+import getContext from './utils/getContext';
+import init from './utils/init';
+import checkFoodCollision from './utils/gameLogic/checkFoodCollision';
+import uploadAllColors from './utils/uploadAllColors';
 
 uploadAllColors();
 const ctx = getContext();
