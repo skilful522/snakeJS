@@ -1,11 +1,14 @@
-import handleKeyPush from './utils/controlling.js';
-import correctPosition from './utils/correctPosition.js';
-import getCorrectRandomPosition from './utils/getCorrectRandomPosition.js';
+import handleKeyPush from './utils/gameControl/handleKeyPush.js';
+import correctPosition from './utils/gameLogic/correctPosition.js';
+import getCorrectRandomPosition from './utils/gameLogic/getCorrectRandomPosition.js';
 import getContext from './utils/getContext.js';
 import init from './utils/init.js';
-import checkFoodCollision from './utils/checkFoodCollision.js';
+import checkFoodCollision from './utils/gameLogic/checkFoodCollision.js';
+import uploadAllColors from './utils/uploadAllColors.js';
 
+uploadAllColors();
 const ctx = getContext();
+
 const { apple, snake, windowSettings } = init();
 const { size, direction, body } = snake;
 const { width } = windowSettings;
@@ -28,5 +31,5 @@ function game() {
 document.addEventListener('keydown', handleKeyPush.bind(this, direction, size));
 
 snake.createSnake(3);
-// setInterval(game, 1000 / 10);
-game();
+setInterval(game, 1000 / 10);
+// game();
