@@ -1,4 +1,4 @@
-import fillBorderApple from '../utils/fillBorderApple.js';
+import fillBorderApple from '../utils/fillBorderApple';
 
 export default class Food extends Image {
     constructor(name, position, size, src) {
