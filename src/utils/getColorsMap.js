@@ -1,4 +1,4 @@
-const colors = {
+const additionalColors = {
     '76,76,76': 'Saddle',
     '27,27,27': 'Tolopea',
     '124,124,124': 'TrendyGreen',
@@ -507,4 +507,18 @@ const colors = {
     ToreaBay: '15,15,15',
 };
 
-export default colors;
+const getColorsMap = (colors) => {
+    const colorsMap = {};
+
+    colors.colors.forEach((color) => {
+        const { r, g, b } = color.rgb;
+        const colorName = color.name.toLowerCase();
+
+        colorsMap[colorName] = `${r},${g},${b}`;
+        colorsMap[`${r},${g},${b}`] = colorName;
+    });
+
+    return { ...colorsMap, ...additionalColors };
+};
+
+export default getColorsMap;

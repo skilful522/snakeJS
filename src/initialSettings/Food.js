@@ -1,4 +1,4 @@
-import fillApple from '../utils/fillApple.js';
+import fillBorderApple from '../utils/fillBorderApple.js';
 
 export default class Food extends Image {
     constructor(name, position, size, src) {
@@ -15,7 +15,7 @@ export default class Food extends Image {
         ctx.drawImage(this, x, y, this.size, this.size);
         const foodImgData = ctx.getImageData(x, y, this.size, this.size);
 
-        fillApple('red', foodImgData);
+        fillBorderApple('red', foodImgData);
         ctx.putImageData(foodImgData, x, y);
     }
 
