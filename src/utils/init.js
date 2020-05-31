@@ -9,7 +9,12 @@ const init = () => {
     const snake = new Snake(
         { x: 75, y: 75 },
         25,
-        new ImageWithSrc(25, 25, 'src/res/snake/snakeHeadRight.png'),
+        [
+            new ImageWithSrc(25, 25, 'src/res/snake/snakeHead/snakeHeadUp.png'),
+            new ImageWithSrc(25, 25, 'src/res/snake/snakeHead/snakeHeadDown.png'),
+            new ImageWithSrc(25, 25, 'src/res/snake/snakeHead/snakeHeadRight.png'),
+            new ImageWithSrc(25, 25, 'src/res/snake/snakeHead/snakeHeadLeft.png'),
+        ],
         new ImageWithSrc(25, 25, 'src/res/snake/snakeBody.png')
     );
     const gift = new Gift('gift', { x: 200, y: 200 }, 25, 'src/res/gift/gift.png');
