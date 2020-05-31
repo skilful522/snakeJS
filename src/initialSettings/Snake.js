@@ -1,6 +1,8 @@
+import getContext from '../utils/getContext';
+
 export default class Snake {
-    constructor(initialPosition, headImg, bodyImg) {
-        this.size = 25;
+    constructor(initialPosition, size, headImg, bodyImg) {
+        this.size = size;
         this.direction = {
             up: false,
             down: false,
@@ -20,15 +22,14 @@ export default class Snake {
         }
     }
 
-    drawSnake(ctx) {
+    draw() {
+        const ctx = getContext();
+
         this.body.forEach((bodyPart, index) => {
             if (index === 0) {
                 ctx.drawImage(this.headImg, bodyPart.x, bodyPart.y, this.size, this.size);
             } else {
                 ctx.drawImage(this.bodyImg, bodyPart.x, bodyPart.y, this.size, this.size);
-                // const bodyImg = ctx.getImageData(bodyPart.x, bodyPart.y,this.size, this.size);
-                // drawGradient(bodyImg,this.size, this.size);
-                // ctx.putImageData(bodyImg,bodyPart.x, bodyPart.y);
             }
         });
     }
@@ -40,9 +41,14 @@ export default class Snake {
         });
     }
 
-    move() {
-        const { body, direction, size } = this;
+    decreaseLength() {
+        if (this.body.length !== 1) {
+            this.body.pop();
+        }
+    }
 
+    move(canvasWidth) {
+        const { body, direction, size } = this;
         const head = body[0];
 
         for (let i = body.length - 1; i > 0; i--) {
@@ -51,7 +57,7 @@ export default class Snake {
             bodyPart.x = body[i - 1].x;
             bodyPart.y = body[i - 1].y;
         }
-
+        this.correctPosition(canvasWidth);
         if (direction.up) {
             head.y -= size;
         }
@@ -65,5 +71,22 @@ export default class Snake {
         if (direction.left) {
             head.x -= size;
         }
+    }
+
+    correctPosition(canvasWidth) {
+        this.body.forEach((bodyPart) => {
+            if (bodyPart.x >= canvasWidth) {
+                bodyPart.x = 0;
+            }
+            if (bodyPart.x < 0) {
+                bodyPart.x = canvasWidth - this.size;
+            }
+            if (bodyPart.y > canvasWidth) {
+                bodyPart.y = 0;
+            }
+            if (bodyPart.y < 0) {
+                bodyPart.y = canvasWidth - this.size;
+            }
+        });
     }
 }

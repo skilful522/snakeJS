@@ -1,6 +1,6 @@
-import getLocalStorage from './localStorage/getLocalStorage.js';
-import getColorsMap from './getColorsMap.js';
-import setLocalStorage from './localStorage/setLocalStorage.js';
+import getLocalStorage from './localStorage/getLocalStorage';
+import getColorsMap from './getColorsMap';
+import setLocalStorage from './localStorage/setLocalStorage';
 
 const uploadAllColors = () => {
     const allColors = getLocalStorage('allColors');
