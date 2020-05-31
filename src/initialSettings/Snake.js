@@ -1,7 +1,7 @@
 import getContext from '../utils/getContext';
 
 export default class Snake {
-    constructor(initialPosition, size, headImg, bodyImg) {
+    constructor(initialPosition, size, headImages, bodyImg) {
         this.size = size;
         this.direction = {
             up: false,
@@ -10,7 +10,7 @@ export default class Snake {
             left: false,
         };
         this.body = [{ x: initialPosition.x, y: initialPosition.y }];
-        this.headImg = headImg;
+        this.headImages = headImages;
         this.bodyImg = bodyImg;
     }
 
@@ -27,7 +27,25 @@ export default class Snake {
 
         this.body.forEach((bodyPart, index) => {
             if (index === 0) {
-                ctx.drawImage(this.headImg, bodyPart.x, bodyPart.y, this.size, this.size);
+                const { up, down, right, left } = this.direction;
+                const [currentDirection] = Object.values(this.direction).filter(Boolean);
+
+                switch (currentDirection) {
+                    case up:
+                        ctx.drawImage(this.headImages[0], bodyPart.x, bodyPart.y, this.size, this.size);
+                        break;
+                    case down:
+                        ctx.drawImage(this.headImages[1], bodyPart.x, bodyPart.y, this.size, this.size);
+                        break;
+                    case right:
+                        ctx.drawImage(this.headImages[2], bodyPart.x, bodyPart.y, this.size, this.size);
+                        break;
+                    case left:
+                        ctx.drawImage(this.headImages[3], bodyPart.x, bodyPart.y, this.size, this.size);
+                        break;
+                    default:
+                        break;
+                }
             } else {
                 ctx.drawImage(this.bodyImg, bodyPart.x, bodyPart.y, this.size, this.size);
             }
