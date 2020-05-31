@@ -1,4 +1,5 @@
 import fillBorderApple from '../utils/fillBorderApple';
+import getContext from '../utils/getContext';
 
 export default class Food extends Image {
     constructor(name, position, size, src) {
@@ -9,7 +10,8 @@ export default class Food extends Image {
         this.src = src;
     }
 
-    drawFood(ctx) {
+    draw() {
+        const ctx = getContext();
         const { x, y } = this.position;
 
         ctx.drawImage(this, x, y, this.size, this.size);
@@ -19,8 +21,14 @@ export default class Food extends Image {
         ctx.putImageData(foodImgData, x, y);
     }
 
-    setCorrectPosition({ x, y }) {
+    setRandomPosition({ x, y }) {
         this.position.x = x;
         this.position.y = y;
+    }
+
+    spawn(freePositions) {
+        const randomIndex = Math.floor(Math.random() * freePositions.length);
+
+        this.setRandomPosition(freePositions[randomIndex]);
     }
 }

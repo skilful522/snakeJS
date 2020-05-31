@@ -1,19 +1,22 @@
-import Food from '../initialSettings/Food.js';
-import Snake from '../initialSettings/Snake.js';
-import WindowSettings from '../initialSettings/WindowSettings.js';
-import ImageWithSrc from './ImageWithSrc.js';
+import Food from '../initialSettings/Food';
+import Snake from '../initialSettings/Snake';
+import CanvasSettings from '../initialSettings/CanvasSettings';
+import ImageWithSrc from './ImageWithSrc';
+import Gift from '../initialSettings/Gift';
 
 const init = () => {
-    const apple = new Food('apple', { x: 100, y: 100 }, 25, 'src/res/food/apple.jpg');
+    const apple = new Food('apple', { x: 250, y: 275 }, 25, 'src/res/food/apple.jpg');
     const snake = new Snake(
         { x: 75, y: 75 },
+        25,
         new ImageWithSrc(25, 25, 'src/res/snake/snakeHeadRight.png'),
         new ImageWithSrc(25, 25, 'src/res/snake/snakeBody.png')
     );
+    const gift = new Gift('gift', { x: 200, y: 200 }, 25, 'src/res/gift/gift.png');
+    const canvasSettings = new CanvasSettings(500, 500, 'black');
+    const gameFieldObjects = { snake, apple, gift };
 
-    const windowSettings = new WindowSettings(500, 500, 'black');
-
-    return { apple, snake, windowSettings };
+    return { canvasSettings, gameFieldObjects };
 };
 
 export default init;

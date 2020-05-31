@@ -10,6 +10,8 @@ module.exports = {
         extensions: ['.js', '.jsx'],
     },
     mode: 'production',
+    watch: true,
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {

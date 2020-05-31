@@ -1,35 +1,45 @@
 import handleKeyPush from './utils/gameControl/handleKeyPush';
-import correctPosition from './utils/gameLogic/correctPosition';
-import getCorrectRandomPosition from './utils/gameLogic/getCorrectRandomPosition';
-import getContext from './utils/getContext';
 import init from './utils/init';
-import checkFoodCollision from './utils/gameLogic/checkFoodCollision';
+import getCollisionObject from './utils/gameLogic/getCollisionObject';
 import uploadAllColors from './utils/uploadAllColors';
+import getGameObjectsPositions from './utils/getGameObjectsPositions';
+import getFieldPositions from './utils/getFieldPositions';
+import getFreePositions from './utils/getFreePositions';
+import Gift from './initialSettings/Gift';
+import getInteractiveGameObjects from './utils/getInteractiveGameObjects';
+import Food from './initialSettings/Food';
 
 uploadAllColors();
-const ctx = getContext();
-
-const { apple, snake, windowSettings } = init();
+const { canvasSettings, gameFieldObjects } = init();
+const { apple, snake, gift } = gameFieldObjects;
 const { size, direction, body } = snake;
-const { width } = windowSettings;
+const { width, elementSize } = canvasSettings;
 
 function game() {
-    const headPosition = snake.body[0];
+    const gameObjectsPositions = getGameObjectsPositions(gameFieldObjects);
+    const fieldPositions = getFieldPositions(elementSize, width);
+    const freePositions = getFreePositions(gameObjectsPositions, fieldPositions);
+    const interactiveGameObjects = getInteractiveGameObjects(gameFieldObjects);
+    const headPosition = body[0];
+    const collisionObject = getCollisionObject(headPosition, interactiveGameObjects);
 
-    windowSettings.drawWindow(ctx);
-    apple.drawFood(ctx);
-    snake.drawSnake(ctx);
-    correctPosition(body);
-    snake.move();
-    if (checkFoodCollision(headPosition, apple.position)) {
-        apple.setCorrectPosition(getCorrectRandomPosition(width, body));
-        snake.increaseLength();
-        apple.drawFood(ctx);
+    canvasSettings.draw();
+    apple.draw();
+    gift.draw();
+    snake.draw();
+    snake.move(width);
+
+    if (collisionObject) {
+        if (collisionObject instanceof Food) {
+            snake.increaseLength();
+        }
+        if (collisionObject instanceof Gift) {
+            Gift.makeRandomActionWith(snake);
+        }
+        collisionObject.spawn(freePositions);
     }
 }
 
 document.addEventListener('keydown', handleKeyPush.bind(this, direction, size));
-
 snake.createSnake(3);
 setInterval(game, 1000 / 10);
-// game();
