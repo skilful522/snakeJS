@@ -92,19 +92,20 @@ export default class Snake {
     }
 
     correctPosition(canvasWidth) {
-        this.body.forEach((bodyPart) => {
-            if (bodyPart.x >= canvasWidth) {
-                bodyPart.x = 0;
-            }
-            if (bodyPart.x < 0) {
-                bodyPart.x = canvasWidth - this.size;
-            }
-            if (bodyPart.y > canvasWidth) {
-                bodyPart.y = 0;
-            }
-            if (bodyPart.y < 0) {
-                bodyPart.y = canvasWidth - this.size;
-            }
-        });
+        const head = this.body[0];
+        const { up, down, right, left } = this.direction;
+
+        if (right && head.x === canvasWidth) {
+            head.x = -this.size;
+        }
+        if (left && head.x === 0) {
+            head.x = canvasWidth;
+        }
+        if (up && head.y === 0) {
+            head.y = canvasWidth;
+        }
+        if (down && head.y === canvasWidth) {
+            head.y = -this.size;
+        }
     }
 }
