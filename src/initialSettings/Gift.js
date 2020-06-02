@@ -1,4 +1,6 @@
 import getContext from '../utils/getContext';
+import soundsPlaylist from '../res/sounds/soundsPlaylist';
+import getRandomAction from '../utils/getRandomAction';
 
 export default class Gift extends Image {
     constructor(name, position, size, src) {
@@ -7,21 +9,26 @@ export default class Gift extends Image {
         this.position = position;
         this.size = size;
         this.src = src;
+        this.actions = ['snakeIncreased', 'snakeDecreased'];
     }
 
-    static makeRandomActionWith(snake) {
-        const randomNumber = Math.floor(Math.random() * 3);
+    makeRandomActionWith(snake) {
+        const { actionsSounds } = soundsPlaylist;
+        const randomAction = getRandomAction(this.actions);
 
-        switch (randomNumber) {
-            case 1:
+        switch (randomAction) {
+            case 'snakeIncreased':
                 snake.increaseLength();
                 break;
-            case 2:
+            case 'snakeDecreased':
                 snake.decreaseLength();
                 break;
             default:
                 break;
         }
+        const actionSound = actionsSounds[randomAction];
+
+        new Audio(actionSound).play();
     }
 
     setRandomPosition({ x, y }) {
