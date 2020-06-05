@@ -9,6 +9,7 @@ import Gift from './initialSettings/Gift';
 import getInteractiveGameObjects from './utils/getInteractiveGameObjects';
 import Food from './initialSettings/Food';
 import soundsPlaylist from './res/sounds/soundsPlaylist';
+import gameInstance from './gameInstance';
 
 uploadAllColors();
 const { canvasSettings, gameFieldObjects } = init();
@@ -28,21 +29,23 @@ function game() {
     apple.draw();
     gift.draw();
     snake.draw();
-    snake.move(width);
+    if (!gameInstance.pause) {
+        snake.move(width);
 
-    if (collisionObject) {
-        if (collisionObject instanceof Food) {
-            const { name } = collisionObject;
-            const { eatFoodSounds } = soundsPlaylist;
-            const eatAppleSound = eatFoodSounds[name];
+        if (collisionObject) {
+            if (collisionObject instanceof Food) {
+                const { name } = collisionObject;
+                const { eatFoodSounds } = soundsPlaylist;
+                const eatAppleSound = eatFoodSounds[name];
 
-            snake.increaseLength();
-            new Audio(eatAppleSound).play();
+                snake.increaseLength();
+                new Audio(eatAppleSound).play();
+            }
+            if (collisionObject instanceof Gift) {
+                gift.makeRandomActionWith(snake);
+            }
+            collisionObject.spawn(freePositions);
         }
-        if (collisionObject instanceof Gift) {
-            gift.makeRandomActionWith(snake);
-        }
-        collisionObject.spawn(freePositions);
     }
 }
 
