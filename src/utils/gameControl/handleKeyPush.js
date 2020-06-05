@@ -1,13 +1,9 @@
-const controller = {
-    arrowLeft: 'ArrowLeft',
-    arrowRight: 'ArrowRight',
-    arrowDown: 'ArrowDown',
-    arrowUp: 'ArrowUp',
-};
+import gameInstance from '../../gameInstance';
 
 function handleKeyPush(direction, size, event) {
     const keyCode = event.code;
-    const { arrowLeft, arrowRight, arrowDown, arrowUp } = controller;
+    const { controller } = gameInstance;
+    const { arrowLeft, arrowRight, arrowDown, arrowUp, space } = controller;
 
     switch (keyCode) {
         case arrowLeft: {
@@ -46,6 +42,12 @@ function handleKeyPush(direction, size, event) {
             direction.down = true;
             break;
         }
+        case space: {
+            gameInstance.pause ? (gameInstance.pause = false) : (gameInstance.pause = true);
+            break;
+        }
+        default:
+            break;
     }
 }
 
