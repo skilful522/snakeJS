@@ -9,7 +9,10 @@ import Gift from './initialSettings/Gift';
 import getInteractiveGameObjects from './utils/getInteractiveGameObjects';
 import Food from './initialSettings/Food';
 import soundsPlaylist from './res/sounds/soundsPlaylist';
-import gameInstance from './gameInstance';
+import gameState from './game/gameState/gameState';
+import refreshRate from './game/options/refreshRate/refreshRate';
+import updateContainer from './DOM/updateContainer';
+const fpsContainer = document.querySelector('.fpsContainer');
 
 uploadAllColors();
 const { canvasSettings, gameFieldObjects } = init();
@@ -18,20 +21,20 @@ const { size, direction, body } = snake;
 const { width, elementSize } = canvasSettings;
 
 function game() {
-    const gameObjectsPositions = getGameObjectsPositions(gameFieldObjects);
-    const fieldPositions = getFieldPositions(elementSize, width);
-    const freePositions = getFreePositions(gameObjectsPositions, fieldPositions);
-    const interactiveGameObjects = getInteractiveGameObjects(gameFieldObjects);
-    const headPosition = body[0];
-    const collisionObject = getCollisionObject(headPosition, interactiveGameObjects);
+    setTimeout(() => requestAnimationFrame(game), refreshRate.currentRate);
+    if (!gameState.pause) {
+        const gameObjectsPositions = getGameObjectsPositions(gameFieldObjects);
+        const fieldPositions = getFieldPositions(elementSize, width);
+        const freePositions = getFreePositions(gameObjectsPositions, fieldPositions);
+        const interactiveGameObjects = getInteractiveGameObjects(gameFieldObjects);
+        const headPosition = body[0];
+        const collisionObject = getCollisionObject(headPosition, interactiveGameObjects);
 
-    canvasSettings.draw();
-    apple.draw();
-    gift.draw();
-    snake.draw();
-    if (!gameInstance.pause) {
+        canvasSettings.draw();
+        apple.draw();
+        gift.draw();
+        snake.draw();
         snake.move(width);
-
         if (collisionObject) {
             if (collisionObject instanceof Food) {
                 const { name } = collisionObject;
@@ -51,4 +54,5 @@ function game() {
 
 document.addEventListener('keydown', handleKeyPush.bind(this, direction, size));
 snake.createSnake(3);
-setInterval(game, 1000 / 10);
+updateContainer(fpsContainer, `FPS - ${refreshRate.getCurrentFps()}`);
+game();

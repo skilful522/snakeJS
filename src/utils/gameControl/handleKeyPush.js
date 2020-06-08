@@ -1,9 +1,15 @@
-import gameInstance from '../../gameInstance';
+import gameState from '../../game/gameState/gameState';
+import refreshRate from '../../game/options/refreshRate/refreshRate';
+import gameControl from '../../game/options/gameControl/gameControl';
+import updateContainer from '../../DOM/updateContainer';
+const fpsContainer = document.querySelector('.fpsContainer');
 
 function handleKeyPush(direction, size, event) {
     const keyCode = event.code;
-    const { controller } = gameInstance;
-    const { arrowLeft, arrowRight, arrowDown, arrowUp, space } = controller;
+    const { keyboardKeys } = gameControl;
+    const { arrowLeft, arrowRight, arrowDown, arrowUp, space, numpadSubtract, numpadAdd } = keyboardKeys;
+    const { fpsRange, getCurrentFps } = refreshRate;
+    const { minFps, maxFps } = fpsRange;
 
     switch (keyCode) {
         case arrowLeft: {
@@ -43,7 +49,26 @@ function handleKeyPush(direction, size, event) {
             break;
         }
         case space: {
-            gameInstance.pause ? (gameInstance.pause = false) : (gameInstance.pause = true);
+            gameState.pause ? (gameState.pause = false) : (gameState.pause = true);
+            break;
+        }
+        case numpadAdd: {
+            const currentFps = getCurrentFps();
+
+            if (currentFps !== maxFps) {
+                refreshRate.increaseRate();
+            }
+            updateContainer(fpsContainer, `FPS - ${getCurrentFps()}`);
+            break;
+        }
+        case numpadSubtract: {
+            const currentFps = getCurrentFps();
+
+            if (currentFps !== minFps) {
+                refreshRate.decreaseRate();
+            }
+
+            updateContainer(fpsContainer, `FPS - ${getCurrentFps()}`);
             break;
         }
         default:
