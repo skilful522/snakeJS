@@ -16,7 +16,3 @@ export default function getCollisionObject(headPosition, interactiveGameObjects)
 
     return collisionObject;
 }
-//  return Object.keys(gameObjectPosition).every((key) => {
-//         console.log(map[key], gameObjectPosition[key]);
-//         return map[key] === gameObjectPosition[key];
-//     });
