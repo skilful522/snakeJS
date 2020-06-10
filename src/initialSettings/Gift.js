@@ -1,6 +1,6 @@
-import getContext from '../utils/getContext';
 import soundsPlaylist from '../res/sounds/soundsPlaylist';
 import getRandomAction from '../utils/getRandomAction';
+import Canvas from './Canvas';
 
 export default class Gift extends Image {
     constructor(name, position, size, src) {
@@ -37,7 +37,8 @@ export default class Gift extends Image {
     }
 
     draw() {
-        const ctx = getContext();
+        const canvas = new Canvas();
+        const ctx = canvas.getContext();
         const { x, y } = this.position;
 
         ctx.drawImage(this, x, y, this.size, this.size);

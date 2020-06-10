@@ -5,7 +5,7 @@
     margin-top: 5%;
 }
 
-.windowField {
+.gameContainer {
     justify-content: center;
     align-items: center;
 }
@@ -31,4 +31,60 @@
     background: black;
     color: white;
     text-align: center;
+}
+
+.mainMenu {
+    background: black;
+    height: 500px;
+    width: 500px;
+    justify-content: space-between;
+}
+
+.title,
+.buttonsContainer {
+    color: white;
+    text-align: center;
+}
+
+.button {
+    margin-bottom: 5%;
+    font-family: Consolas;
+    text-align: center;
+    width: 125px;
+    font-size: 24px;
+    background: white;
+    border-radius: 4%;
+    outline: none;
+    border: none;
+}
+
+.button:hover {
+    cursor: pointer;
+    background: black;
+
+    border: 1px solid white;
+    color: white;
+}
+
+.buttonsContainer {
+    padding: 10% 20% 20% 20%;
+}
+
+.title {
+    font-size: 32px;
+    padding: 23%;
+    font-family: Consolas;
+    box-sizing: content-box;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.disableHighlighting {
+    user-select: none;
 }

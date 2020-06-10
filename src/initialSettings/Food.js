@@ -1,5 +1,5 @@
 import fillBorderApple from '../utils/fillBorderApple';
-import getContext from '../utils/getContext';
+import Canvas from './Canvas';
 
 export default class Food extends Image {
     constructor(name, position, size, src) {
@@ -11,7 +11,8 @@ export default class Food extends Image {
     }
 
     draw() {
-        const ctx = getContext();
+        const canvas = new Canvas();
+        const ctx = canvas.getContext();
         const { x, y } = this.position;
 
         ctx.drawImage(this, x, y, this.size, this.size);
