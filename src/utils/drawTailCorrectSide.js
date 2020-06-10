@@ -1,8 +1,8 @@
-import getContext from './getContext';
-
-const ctx = getContext();
+import Canvas from '../initialSettings/Canvas';
 
 export default function drawTailCorrectSide(snakeBody, tailImages, size, bodyPart) {
+    const canvas = new Canvas();
+    const ctx = canvas.getContext();
     const tail = snakeBody[snakeBody.length - 1];
     const beforeTail = snakeBody[snakeBody.length - 2];
     const { rightSideTail, leftSideTail, upSideTail, downSideTail } = tailImages;

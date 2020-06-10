@@ -1,10 +1,9 @@
-import getContext from './getContext';
-
-const ctx = getContext();
+import Canvas from '../initialSettings/Canvas';
 
 export default function drawHeadCorrectSide(direction, headImages, size, bodyPart) {
+    const canvas = new Canvas();
+    const ctx = canvas.getContext();
     const [currentDirection] = Object.values(direction).filter(Boolean);
-
     const { up, down, right, left } = direction;
     const { upSideHead, downSideHead, rightSideHead, leftSideHead } = headImages;
 

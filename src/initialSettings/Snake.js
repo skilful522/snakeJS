@@ -1,6 +1,6 @@
-import getContext from '../utils/getContext';
 import drawHeadCorrectSide from '../utils/drawHeadCorrectSide';
 import drawTailCorrectSide from '../utils/drawTailCorrectSide';
+import Canvas from './Canvas';
 
 export default class Snake {
     constructor(initialPosition, size, snakeImage) {
@@ -24,7 +24,8 @@ export default class Snake {
     }
 
     draw() {
-        const ctx = getContext();
+        const canvas = new Canvas();
+        const ctx = canvas.getContext();
         const { bodyImage, headImages, tailImages } = this.snakeImage;
         const lastIndex = this.body.length - 1;
 

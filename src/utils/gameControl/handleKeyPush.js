@@ -1,8 +1,7 @@
 import gameState from '../../game/gameState/gameState';
 import refreshRate from '../../game/options/refreshRate/refreshRate';
 import gameControl from '../../game/options/gameControl/gameControl';
-import updateContainer from '../../DOM/updateContainer';
-const fpsContainer = document.querySelector('.fpsContainer');
+import gameContainer from '../../DOM/GameContainer/GameContainer';
 
 function handleKeyPush(direction, size, event) {
     const keyCode = event.code;
@@ -58,7 +57,7 @@ function handleKeyPush(direction, size, event) {
             if (currentFps !== maxFps) {
                 refreshRate.increaseRate();
             }
-            updateContainer(fpsContainer, `FPS - ${getCurrentFps()}`);
+            gameContainer.setInnerText('fpsContainer', `FPS - ${refreshRate.getCurrentFps()}`);
             break;
         }
         case numpadSubtract: {
@@ -68,7 +67,7 @@ function handleKeyPush(direction, size, event) {
                 refreshRate.decreaseRate();
             }
 
-            updateContainer(fpsContainer, `FPS - ${getCurrentFps()}`);
+            gameContainer.setInnerText('fpsContainer', `FPS - ${refreshRate.getCurrentFps()}`);
             break;
         }
         default:
