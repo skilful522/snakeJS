@@ -83,17 +83,17 @@ export default class Snake {
         const head = this.body[0];
         const { up, down, right, left } = this.direction;
 
-        if (right && head.x === canvasWidth) {
-            head.x = -this.size;
-        }
-        if (left && head.x === 0) {
-            head.x = canvasWidth;
-        }
-        if (up && head.y === 0) {
+        if (up && head.y <= 0) {
             head.y = canvasWidth;
         }
-        if (down && head.y === canvasWidth) {
+        if (right && head.x >= canvasWidth - this.size) {
+            head.x = -this.size;
+        }
+        if (down && head.y >= canvasWidth - this.size) {
             head.y = -this.size;
+        }
+        if (left && head.x <= 0) {
+            head.x = canvasWidth;
         }
     }
 }
