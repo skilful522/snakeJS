@@ -7,6 +7,7 @@ const gameControl = {
         space: 'Space',
         numpadSubtract: 'NumpadSubtract',
         numpadAdd: 'NumpadAdd',
+        keyM: 'KeyM',
     },
 };
 

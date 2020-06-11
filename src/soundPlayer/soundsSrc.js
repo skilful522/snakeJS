@@ -1,11 +1,11 @@
-const soundsPlayList = {
-    eatFoodSounds: {
+const soundsSrc = {
+    eatFoodSrc: {
         apple: 'src/res/sounds/food/eat-sound.m4a',
     },
-    actionsSounds: {
+    actionsSrc: {
         snakeIncreased: 'src/res/sounds/gift/snake-increased.m4a',
         snakeDecreased: 'src/res/sounds/gift/snake-decreased.m4a',
     },
 };
 
-export default soundsPlayList;
+export default soundsSrc;

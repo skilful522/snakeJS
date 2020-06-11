@@ -1,4 +1,5 @@
-import soundsPlaylist from '../res/sounds/soundsPlaylist';
+import soundPlayer from '../soundPlayer/soundPlayer';
+import soundsPlaylist from '../soundPlayer/soundsSrc';
 import getRandomAction from '../utils/getRandomAction';
 import Canvas from './Canvas';
 
@@ -13,7 +14,7 @@ export default class Gift extends Image {
     }
 
     makeRandomActionWith(snake) {
-        const { actionsSounds } = soundsPlaylist;
+        const { actionsSrc } = soundsPlaylist;
         const randomAction = getRandomAction(this.actions);
 
         switch (randomAction) {
@@ -26,9 +27,7 @@ export default class Gift extends Image {
             default:
                 break;
         }
-        const actionSound = actionsSounds[randomAction];
-
-        new Audio(actionSound).play();
+        soundPlayer.play(actionsSrc[randomAction]);
     }
 
     setRandomPosition({ x, y }) {

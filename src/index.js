@@ -8,12 +8,13 @@ import getFreePositions from './utils/getFreePositions';
 import Gift from './initialSettings/Gift';
 import getInteractiveGameObjects from './utils/getInteractiveGameObjects';
 import Food from './initialSettings/Food';
-import soundsPlaylist from './res/sounds/soundsPlaylist';
+import soundsSrc from './soundPlayer/soundsSrc';
 import gameState from './game/gameState/gameState';
 import refreshRate from './game/options/refreshRate/refreshRate';
 import mainMenu from './DOM/MainMenu/MainMenu';
 import gameContainer from './DOM/GameContainer/GameContainer';
 import Canvas from './initialSettings/Canvas';
+import soundPlayer from './soundPlayer/soundPlayer';
 
 mainMenu.buttonHandler('newGame', () => {
     mainMenu.hide();
@@ -45,11 +46,10 @@ mainMenu.buttonHandler('newGame', () => {
             if (collisionObject) {
                 if (collisionObject instanceof Food) {
                     const { name } = collisionObject;
-                    const { eatFoodSounds } = soundsPlaylist;
-                    const eatAppleSound = eatFoodSounds[name];
+                    const { eatFoodSrc } = soundsSrc;
 
                     snake.increaseLength();
-                    new Audio(eatAppleSound).play();
+                    soundPlayer.play(eatFoodSrc[name]);
                 }
                 if (collisionObject instanceof Gift) {
                     gift.makeRandomActionWith(snake);

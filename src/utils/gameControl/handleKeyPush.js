@@ -2,11 +2,12 @@ import gameState from '../../game/gameState/gameState';
 import refreshRate from '../../game/options/refreshRate/refreshRate';
 import gameControl from '../../game/options/gameControl/gameControl';
 import gameContainer from '../../DOM/GameContainer/GameContainer';
+import soundPlayer from '../../soundPlayer/soundPlayer';
 
 function handleKeyPush(direction, size, event) {
     const keyCode = event.code;
     const { keyboardKeys } = gameControl;
-    const { arrowLeft, arrowRight, arrowDown, arrowUp, space, numpadSubtract, numpadAdd } = keyboardKeys;
+    const { arrowLeft, arrowRight, arrowDown, arrowUp, space, numpadSubtract, numpadAdd, keyM } = keyboardKeys;
     const { fpsRange, getCurrentFps } = refreshRate;
     const { minFps, maxFps } = fpsRange;
 
@@ -68,6 +69,10 @@ function handleKeyPush(direction, size, event) {
             }
 
             gameContainer.setInnerText('fpsContainer', `FPS - ${refreshRate.getCurrentFps()}`);
+            break;
+        }
+        case keyM: {
+            soundPlayer.audioMute ? (soundPlayer.audioMute = false) : (soundPlayer.audioMute = true);
             break;
         }
         default:
