@@ -1,5 +1,5 @@
-import fillBorderApple from '../utils/fillBorderApple';
 import Canvas from './Canvas';
+import fillBorderApple from '../utils/fillBorderApple';
 
 export default class Food extends Image {
     constructor(name, position, size, src) {

@@ -17,9 +17,9 @@ function getRGBArr(rgbStr) {
     return [r, g, b];
 }
 
-export default function fillBorderApple(colorName, imgData) {
+export default async function fillBorderApple(colorName, imgData) {
     const pixels = getPixels(imgData);
-    const colorsMap = getLocalStorage('colorsMap');
+    const colorsMap = await getLocalStorage('colorsMap');
     const imgColors = pixels.map((pixel) => {
         const rgb = getRGBKey(pixel);
 

@@ -1,6 +1,8 @@
-const getLocalStorage = (key) => {
+import localForage from 'localforage';
+
+const getLocalStorage = async (key) => {
     try {
-        const data = localStorage.getItem(key);
+        const data = await localForage.getItem(key);
 
         if (!data) {
             return [];
